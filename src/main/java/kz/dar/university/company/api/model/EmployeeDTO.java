@@ -12,7 +12,7 @@ public class EmployeeDTO {
     private String employeeId;
     private String name;
     private String surname;
-    private String companyId;
+    private String company;
     private String position;
     private String email;
     private double salary;

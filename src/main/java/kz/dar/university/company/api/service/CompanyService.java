@@ -1,7 +1,10 @@
 package kz.dar.university.company.api.service;
 
 import kz.dar.university.company.api.feign.EmployeeClient;
+import kz.dar.university.company.api.feign.TaskClient;
 import kz.dar.university.company.api.model.EmployeeDTO;
+import kz.dar.university.company.api.model.task.TaskDTO;
+import kz.dar.university.company.api.model.task.TaskResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,9 @@ public class CompanyService implements ICompanyService {
 
     @Autowired
     private EmployeeClient employeeClient;
+
+    @Autowired
+    private TaskClient taskClient;
 
     @Override
     public List<EmployeeDTO> filterEmployees() {
@@ -26,6 +32,33 @@ public class CompanyService implements ICompanyService {
         }
 
         return result;
+    }
+
+    @Override
+    public List<TaskResponse> getAllTasksWithFullInfo() {
+
+        List<TaskResponse> result = new ArrayList<>();
+
+        // 1. Получить информацию о всех тасках
+        List<TaskDTO> taskList = taskClient.getAllTasks();
+
+        for (TaskDTO task : taskList) {
+            // 2. Получить информацию о сотруднике по ID из таска
+            String employeeId = task.getEmployeeId();
+            EmployeeDTO employee = employeeClient.getEmployeeById(employeeId);
+
+            // 3. Сопоставить информацию о сотруднике и таске
+            TaskResponse taskResponse = new TaskResponse();
+            taskResponse.setTaskId(task.getTaskId());
+            taskResponse.setDescription(task.getDescription());
+            taskResponse.setEmployee(employee);
+
+            result.add(taskResponse);
+        }
+
+        // 4. Вывести детальную информацию о тасках
+        return result;
+
     }
 
 }

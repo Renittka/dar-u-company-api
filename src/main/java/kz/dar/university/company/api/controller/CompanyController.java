@@ -2,6 +2,7 @@ package kz.dar.university.company.api.controller;
 
 import kz.dar.university.company.api.feign.EmployeeClient;
 import kz.dar.university.company.api.model.EmployeeDTO;
+import kz.dar.university.company.api.model.task.TaskResponse;
 import kz.dar.university.company.api.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +34,10 @@ public class CompanyController {
 
     }
 
-
     @GetMapping("/employee/list")
     public List<EmployeeDTO> getAllEmployees() {
 
-         return employeeClient.getAllEmployees();
+        return employeeClient.getAllEmployees();
 
     }
 
@@ -52,6 +52,13 @@ public class CompanyController {
     public EmployeeDTO getEmployeeById(@PathVariable String employeeId) {
 
         return employeeClient.getEmployeeById(employeeId);
+
+    }
+
+    @GetMapping("/task/all")
+    public List<TaskResponse> getAllTasksWithFullInfo() {
+
+        return companyService.getAllTasksWithFullInfo();
 
     }
 
