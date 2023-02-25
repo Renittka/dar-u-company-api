@@ -1,4 +1,4 @@
-package kz.dar.university.company.api.model;
+package kz.dar.university.company.api.model.employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployeeDTO {
 
-    private String employeeId;
+    //private String employeeId;
     private String name;
     private String surname;
     private String company;

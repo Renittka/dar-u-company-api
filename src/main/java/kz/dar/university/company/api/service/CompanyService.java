@@ -2,7 +2,7 @@ package kz.dar.university.company.api.service;
 
 import kz.dar.university.company.api.feign.EmployeeClient;
 import kz.dar.university.company.api.feign.TaskClient;
-import kz.dar.university.company.api.model.EmployeeDTO;
+import kz.dar.university.company.api.model.employee.EmployeeDTO;
 import kz.dar.university.company.api.model.task.TaskDTO;
 import kz.dar.university.company.api.model.task.TaskResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +44,18 @@ public class CompanyService implements ICompanyService {
 
         for (TaskDTO task : taskList) {
             // 2. Получить информацию о сотруднике по ID из таска
-            String employeeId = task.getEmployeeId();
-            EmployeeDTO employee = employeeClient.getEmployeeById(employeeId);
+            String initiatorId = task.getInitiatorId();
+            String executorId = task.getExecutorId();
+
+            EmployeeDTO initiator = employeeClient.getEmployeeById(initiatorId);
+            EmployeeDTO executor = employeeClient.getEmployeeById(executorId);
 
             // 3. Сопоставить информацию о сотруднике и таске
             TaskResponse taskResponse = new TaskResponse();
             taskResponse.setTaskId(task.getTaskId());
             taskResponse.setDescription(task.getDescription());
-            taskResponse.setEmployee(employee);
+            taskResponse.setInitiator(initiator);
+            taskResponse.setExecutor(executor);
 
             result.add(taskResponse);
         }

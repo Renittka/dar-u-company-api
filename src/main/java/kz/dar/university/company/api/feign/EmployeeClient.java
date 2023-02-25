@@ -1,9 +1,8 @@
 package kz.dar.university.company.api.feign;
 
-import kz.dar.university.company.api.model.EmployeeDTO;
+import kz.dar.university.company.api.model.employee.EmployeeDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;

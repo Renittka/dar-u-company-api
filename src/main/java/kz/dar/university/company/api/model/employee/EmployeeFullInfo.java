@@ -1,4 +1,6 @@
-package kz.dar.university.company.api.model;
+package kz.dar.university.company.api.model.employee;
+
+import kz.dar.university.company.api.model.company.CompanyModel;
 
 public class EmployeeFullInfo {
 

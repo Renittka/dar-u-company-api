@@ -1,14 +1,14 @@
 package kz.dar.university.company.api.controller;
 
 import kz.dar.university.company.api.feign.EmployeeClient;
-import kz.dar.university.company.api.model.EmployeeDTO;
+import kz.dar.university.company.api.feign.TaskClient;
+import kz.dar.university.company.api.model.employee.EmployeeDTO;
+import kz.dar.university.company.api.model.task.TaskDTO;
+import kz.dar.university.company.api.model.task.TaskRequest;
 import kz.dar.university.company.api.model.task.TaskResponse;
 import kz.dar.university.company.api.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +21,9 @@ public class CompanyController {
 
     @Autowired
     private ICompanyService companyService;
+
+    @Autowired
+    private TaskClient taskClient;
 
     @GetMapping("/check")
     public String check() {
@@ -59,6 +62,13 @@ public class CompanyController {
     public List<TaskResponse> getAllTasksWithFullInfo() {
 
         return companyService.getAllTasksWithFullInfo();
+
+    }
+
+    @PostMapping("/task")
+    public void createTask(@RequestBody TaskRequest task) {
+
+        taskClient.createTask(task);
 
     }
 

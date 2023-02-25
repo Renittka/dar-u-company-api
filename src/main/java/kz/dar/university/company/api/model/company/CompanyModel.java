@@ -1,4 +1,4 @@
-package kz.dar.university.company.api.model;
+package kz.dar.university.company.api.model.company;
 
 public class CompanyModel {
 
