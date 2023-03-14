@@ -3,7 +3,6 @@ package kz.dar.university.company.api.controller;
 import kz.dar.university.company.api.feign.EmployeeClient;
 import kz.dar.university.company.api.feign.TaskClient;
 import kz.dar.university.company.api.model.employee.EmployeeDTO;
-import kz.dar.university.company.api.model.task.TaskDTO;
 import kz.dar.university.company.api.model.task.TaskRequest;
 import kz.dar.university.company.api.model.task.TaskResponse;
 import kz.dar.university.company.api.service.ICompanyService;
